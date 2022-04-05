@@ -5,8 +5,11 @@
             <div><strong>Имя: </strong> {{ user.first_name }} </div>
             <div><strong>Фамилия: </strong> {{ user.last_name }} </div>
             <div><strong>Email: </strong> {{ user.email }} </div>
-            <div><strong>Аватар: </strong> {{ user.avatar }} </div>
         </div>
+        <div>  
+            <img :src=user.avatar />  
+        </div>
+        
     </div>
 </template>
 
@@ -23,8 +26,9 @@ export default {
 
 <style>
 .user {
-    padding: 15px;
-    border: 2px solid teal;
+    padding: 20px;
+    border: 2px solid rgba(0, 87, 128, 0.11);
+    background-color: rgb(250, 250, 250);
     margin-top: 15px;
     display: flex;
     align-items: center;

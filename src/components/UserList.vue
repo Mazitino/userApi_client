@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .user-list-item {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 30px;
 }
 .user-list-enter-active,
 .user-list-leave-active {

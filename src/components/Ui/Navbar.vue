@@ -1,10 +1,8 @@
 <template>
     <div class="navbar">
-        <div @click="$router.push('/')" style="margin-left: 20px" >Главная</div>
-        <div class="navbar_btns">
-            <my-button @click="$router.push('/users')">пользователи</my-button>
-            <my-button style="margin-left: 20px" @click="$router.push('/about')">О нас</my-button>
-        </div>
+        <div @click="$router.push('/')" class="navbar_btns" >Главная</div>
+        <div @click="$router.push('/users')" class="navbar_btns" >Пользователи</div>
+        <div @click="$router.push('/about')" class="navbar_btns" >О нас</div>
     </div>
 </template>
 
@@ -17,14 +15,14 @@ export default {
 
 <style scoped>
 .navbar{
-    height: 60px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 10px rgba(212, 212, 212, 0.616);
     display: flex;
-    align-items: center;
-    padding: 0x 15px;
+    justify-content: center;
+    background-color: rgb(27, 27, 27);
+    color: white;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.692);
 }
 .navbar_btns{
-    margin-left: auto;
+    padding: 15px;
+    background-color: rgb(27, 27, 27);
 }
 </style>

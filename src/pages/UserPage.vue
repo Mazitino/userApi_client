@@ -1,46 +1,44 @@
 <template>
-    <div >
-        <h1>Страница с пользователями</h1>
-        <my-input
-            v-on:keyup.enter="fetchUser"
-            v-model="searchFirstName"
-            placeholder="Поиск по имени в базе...."
-        />
-        <my-input
-            v-model="searchLastName"
-            v-on:keyup.enter="fetchUser"
-            placeholder="Поиск по фамилии в базе...."
-        />
-        <my-input
-            v-model="searchQuery"
-            placeholder="Фильтр по имени...."
-        />
-        <my-input
-            v-model="searchQuery2"
-            placeholder="Фильтр по фамилии...."
-        />
+    <div>
+        <h1 class="app_text">Страница с пользователями</h1>
+        <div class="app_box">
+            <my-input
+                v-on:keyup.enter="fetchUser"
+                v-model="searchFirstName"
+                placeholder="Поиск по имени в базе...."
+            />
+            <my-input
+                v-model="searchLastName"
+                v-on:keyup.enter="fetchUser"
+                placeholder="Поиск по фамилии в базе...."
+            />
+        </div>
+        <div class="app_box">
+            <my-input
+                v-model="searchQuery"
+                placeholder="Фильтр по имени...."
+            />
+            <my-input
+                v-model="searchQuery2"
+                placeholder="Фильтр по фамилии...."
+            />
+        </div>
         <div class="app_btns">
             <my-select
                 v-model="selectedSort"
                 :options="sortOptions"
             />
         </div>
-        
-        <user-list 
-            :users="sortedAndSearchedUsers2"
-            v-if="!isUserLoading"
-        />
-        <div v-else>Идет загрузка...</div>
-        <div ref="observer" class="observer" ></div>
+        <div class="app_text">
+            <user-list 
+                :users="sortedAndSearchedUsers2"
+                v-if="!isUserLoading"
+            />
+            <div v-else>Идет загрузка...</div>
+            <div ref="observer" class="observer" ></div>
+        </div>
     </div>
 </template>
-
-
-
-
-
-
-
 
 
 <script>
@@ -73,6 +71,7 @@ export default {
         async fetchUser(){
             try{
                 this.isUserLoading = true;
+                
                 if(this.searchFirstName || this.searchLastName)
                 {
                     const responce = await axios.get('http://localhost:8080/api/user', {
@@ -81,6 +80,9 @@ export default {
                             last_name: this.searchLastName
                         }
                     });
+                    this.totalPages = 1;
+                    this.page = 1;
+                    this.limit = 1;
                     this.users = [responce.data.data];
                     console.log( this.users);
                 } else {
@@ -118,6 +120,7 @@ export default {
         async loadMoreUsers(){
             try {
                 this.page +=1;
+                
                 const responce = await axios.get('http://localhost:8080/api/users', {
                     params: {
                         page: this.page,
@@ -164,31 +167,22 @@ export default {
 </script>
 
 
-
-
-
-
-
-
-
 <style>
+.app_text{
+    margin: 0 10%;
+}
+.app_box{
+    display: flex;
+    margin: 0 10%;
+    justify-content: space-between  ; 
+}
 
 .app_btns{
-    margin: 15px 0;
+    margin: 15px 10%;
     display: flex;
     justify-content: space-between;
 }
-.page_wrapper {
-    display: flex;
-    margin-top: 15px;
-}
-.page {
-    border: 1px solid black;
-    padding: 10px;
-}
-.current-page{
-    border: 2px solid teal;
-}
+
 .observer {
     height: 30px;
     background: rgba(0, 128, 128, 0);
